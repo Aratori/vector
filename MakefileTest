@@ -1,0 +1,16 @@
+CLIBS = -lgtest -lgtest_main  -lpthread
+CFLAGS = -std=c++0x 
+
+all: MyVectorTest
+
+MyVectorTest: smart_ptr.o
+	g++ $(CFLAGS) VectorTest.o -o VectorTest $(CLIBS)
+
+VectorTest.o: VectorTest.cpp MyVector.h MyVector.cpp
+	g++ $(CFLAGS)  -c VectorTest.cpp $(CLIBS)
+
+MyVector.o: MyVector.cpp MyVector.h
+	g++ $(CFLAGS) -c MyVector.cpp MyVector.h
+
+clean:
+	rm -rf *.o VectorTest
